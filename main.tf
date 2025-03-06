@@ -328,29 +328,6 @@ resource "azuread_conditional_access_policy" "usr_g_register_security_info" {
   conditions {
     users {
       included_users  = ["all"]
-      excluded_groups = ["<CA exclude group - USR - G - Register security info>"]
-    }
-    
-
-    applications {
-      included_user_actions = ["urn:user:registersecurityinfo"] # This ensures the policy applies to "Register security information"
-    }
-
-    client_app_types = ["all"]
-  }
-
-  grant_controls {
-    operator            = "OR"
-    built_in_controls   = ["require_mfa"]
-  }
-}
-resource "azuread_conditional_access_policy" "usr_g_register_security_info" {
-  display_name = "USR - G - Register security info with strong auth"
-  state        = "enabled"
-
-  conditions {
-    users {
-      included_users  = ["all"]
       excluded_groups = [var.admin_group.excluded_group_usr_g_register_security_info]
     }
 
